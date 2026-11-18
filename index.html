@@ -1,96 +1,137 @@
-
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#101b30">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#07152f">
 <title>شعبة فاء العظيمة</title>
 <style>
 *{box-sizing:border-box}
 body{
-margin:0;
-font-family:Arial,sans-serif;
-background:#101b30;
-color:white;
+ margin:0;
+ font-family:Tahoma,Arial,sans-serif;
+ background:#07152f;
+ color:#fff;
 }
 header{
-padding:30px 20px;
-background:#1b2b45;
-border-bottom:2px solid #d6b45c;
+ text-align:center;
+ padding:35px 15px;
+ background:linear-gradient(135deg,#10294c,#07152f);
+ border-bottom:2px solid #d6ae52;
 }
-h1{color:#e8c66f}
-main{padding:18px}
+h1{color:#e5c36b;margin:8px}
+header p{color:#d5d9e2}
+main{padding:18px;max-width:700px;margin:auto}
+h2{color:#e5c36b;font-size:20px}
+.cards{
+ display:grid;
+ grid-template-columns:1fr 1fr;
+ gap:12px;
+}
 .card{
-background:#1c2d49;
-padding:20px;
-margin:15px 0;
-border-radius:16px;
-border:1px solid #3b4c65;
+ background:#102747;
+ border:1px solid #b9974b;
+ border-radius:14px;
+ padding:22px 10px;
+ text-align:center;
+ cursor:pointer;
 }
-.card h2{color:#e8c66f}
-.honor{
-text-align:center;
-border:1px solid #d6b45c;
+.card span{font-size:27px;display:block;margin-bottom:10px}
+.card b{color:#f0d58e}
+.section{
+ display:none;
+ background:#102747;
+ border:1px solid #b9974b;
+ border-radius:14px;
+ padding:18px;
+ margin-top:18px;
 }
-.gold{color:#e8c66f}
-footer{
-text-align:center;
-padding:25px;
-color:#b8c3d3;
+.section.active{display:block}
+button{
+ background:#d6ae52;
+ color:#07152f;
+ border:0;
+ border-radius:9px;
+ padding:11px 18px;
+ font-weight:bold;
+ cursor:pointer;
 }
+input,textarea{
+ width:100%;
+ padding:12px;
+ margin:8px 0;
+ border-radius:8px;
+ border:1px solid #d6ae52;
+ background:#07152f;
+ color:white;
+}
+footer{text-align:center;color:#b9c1d0;padding:25px}
 </style>
 </head>
 <body>
 
 <header>
-<h1>🏆 شعبة فاء العظيمة</h1>
-<p>الرابع العلمي | شعبة فاء</p>
-<p>أهلاً بكم في مجتمعنا الدراسي</p>
+ <div style="font-size:40px">👑</div>
+ <h1>شعبة فاء العظيمة</h1>
+ <p>الرابع العلمي | العلم والطموح والتميز</p>
 </header>
 
 <main>
-<div class="card">
-<h2>📚 الواجبات والوظائف</h2>
-<p>واجبات طلاب الشعبة</p>
-</div>
+ <h2>القائمة الرئيسية</h2>
 
-<div class="card">
-<h2>📅 الجدول الدراسي</h2>
-<p>جدول الحصص الأسبوعي</p>
-</div>
+ <div class="cards">
+  <div class="card" onclick="show('homework')"><span>📚</span><b>الواجبات</b></div>
+  <div class="card" onclick="show('schedule')"><span>📅</span><b>الجدول الدراسي</b></div>
+  <div class="card" onclick="show('news')"><span>📢</span><b>الإعلانات</b></div>
+  <div class="card" onclick="show('chat')"><span>💬</span><b>المحادثات</b></div>
+  <div class="card" onclick="show('memories')"><span>📸</span><b>الذكريات</b></div>
+  <div class="card" onclick="show('honor')"><span>🏆</span><b>لوحة الشرف</b></div>
+ </div>
 
-<div class="card">
-<h2>📢 الإعلانات والأخبار</h2>
-<p>أخبار وإعلانات الشعبة</p>
-</div>
+ <div id="homework" class="section">
+  <h2>📚 الواجبات</h2>
+  <p>ستظهر الواجبات المدرسية هنا.</p>
+ </div>
 
-<div class="card">
-<h2>💬 المحادثات</h2>
-<p>تواصل طلاب شعبة فاء</p>
-</div>
+ <div id="schedule" class="section">
+  <h2>📅 الجدول الدراسي</h2>
+  <p>سيتم وضع جدول الحصص هنا.</p>
+ </div>
 
-<div class="card">
-<h2>📸 الصور والذكريات</h2>
-<p>ذكرياتنا الجميلة</p>
-</div>
+ <div id="news" class="section">
+  <h2>📢 الإعلانات</h2>
+  <p>آخر أخبار وإعلانات الشعبة.</p>
+ </div>
 
-<div class="card honor">
-<h2>👑 الأول على الشعبة السنة الماضية</h2>
-<h1 class="gold">حسين خلف فيصل</h1>
-<h2 class="gold">(العرّاب)</h2>
-</div>
+ <div id="chat" class="section">
+  <h2>💬 المحادثات</h2>
+  <p>قسم التواصل بين طلاب الشعبة.</p>
+  <p>المحادثات الفعلية تحتاج إلى تسجيل دخول وقاعدة بيانات.</p>
+ </div>
 
-<div class="card honor">
-<h2>🥇 الطالب الأعلى تقييماً هذا الأسبوع</h2>
-<p>سيتم الإعلان عن الفائز هنا</p>
-</div>
+ <div id="memories" class="section">
+  <h2>📸 الذكريات</h2>
+  <p>ذكريات وصور الشعبة ستوضع هنا.</p>
+ </div>
+
+ <div id="honor" class="section">
+  <h2>🏆 لوحة الشرف</h2>
+  <h3 style="color:#e5c36b">حسين خلف فيصل</h3>
+  <p>اللقب: العرّاب 👑</p>
+  <p>تكريماً للأول على الشعبة في السنة الماضية.</p>
+ </div>
 </main>
 
-<footer>
-شعبة فاء العظيمة © 2026
-</footer>
+<footer>© شعبة فاء العظيمة</footer>
+
+<script>
+function show(id){
+ document.querySelectorAll('.section').forEach(s=>{
+  s.classList.remove('active');
+ });
+ document.getElementById(id).classList.add('active');
+}
+</script>
 
 </body>
-  </html>
-
+</html>
