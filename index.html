@@ -132,6 +132,87 @@ function show(id){
  document.getElementById(id).classList.add('active');
 }
 </script>
+<section id="live-chat" style="background:#102747;border:1px solid #d6ae52;border-radius:14px;padding:18px;margin:20px 0;color:white">
+  <h2 style="color:#e5c36b">💬 دردشة شعبة فاء العظيمة</h2>
+  <div id="messages" style="height:250px;overflow-y:auto;background:#07152f;padding:12px;border-radius:10px;margin-bottom:12px">
+    جاري الاتصال...
+  </div>
+  <input id="chat-name" placeholder="اسمك" style="width:100%;padding:12px;margin:5px 0">
+  <input id="chat-text" placeholder="اكتب رسالتك..." style="width:100%;padding:12px;margin:5px 0">
+  <button id="send-message" style="padding:12px;background:#d6ae52;border:0;border-radius:8px">إرسال</button>
+  <p id="chat-status"></p>
+</section>
 
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-app.js";
+import {
+  getFirestore, collection, addDoc, query,
+  orderBy, limit, onSnapshot, serverTimestamp
+} from "https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyBpYhM-czPBHGVWJ3BYDoVA7jCS3G5nbIQ",
+  authDomain: "fa-class-app.firebaseapp.com",
+  projectId: "fa-class-app",
+  storageBucket: "fa-class-app.firebasestorage.app",
+  messagingSenderId: "657366801476",
+  appId: "1:657366801476:web:a6551d985116c0ca5c7011"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+const messagesRef = collection(db, "messages");
+
+const output = document.getElementById("messages");
+const nameInput = document.getElementById("chat-name");
+const textInput = document.getElementById("chat-text");
+const status = document.getElementById("chat-status");
+
+const messagesQuery = query(
+  messagesRef, orderBy("createdAt", "asc"), limit(100)
+);
+
+onSnapshot(messagesQuery, snapshot => {
+  output.innerHTML = "";
+  snapshot.forEach(doc => {
+    const msg = doc.data();
+    const item = document.createElement("p");
+    item.textContent = (msg.name || "طالب") + ": " + (msg.text || "");
+    output.appendChild(item);
+  });
+  output.scrollTop = output.scrollHeight;
+}, error => {
+  status.textContent = "تعذر تحميل الرسائل. راجع قواعد الأمان.";
+  console.error(error);
+});
+
+document.getElementById("send-message").addEventListener("click", async () => {
+  const name = nameInput.value.trim();
+  const text = textInput.value.trim();
+
+  if (!name || !text) {
+    status.textContent = "اكتب اسمك ورسالتك أولاً.";
+    return;
+  }
+
+  if (text.length > 500 || name.length > 40) {
+    status.textContent = "الرسالة أو الاسم أطول من المسموح.";
+    return;
+  }
+
+  try {
+    await addDoc(messagesRef, {
+      name,
+      text,
+      createdAt: serverTimestamp()
+    });
+    textInput.value = "";
+    status.textContent = "تم إرسال الرسالة.";
+  } catch (error) {
+    status.textContent = "لم تُرسل الرسالة. تأكد من إعدادات الأمان.";
+    console.error(error);
+  }
+});
+     </script>
 </body>
 </html>
