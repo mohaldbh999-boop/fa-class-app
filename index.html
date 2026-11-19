@@ -214,5 +214,250 @@ document.getElementById("send-message").addEventListener("click", async () => {
   }
 });
      </script>
+ 
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>شعبة فاء العظيمة</title>
+<style>
+*{box-sizing:border-box}
+body{
+ margin:0;background:#07152f;color:white;
+ font-family:Arial,sans-serif;padding:20px;
+}
+header{text-align:center;padding:25px 5px}
+h1{color:#e5c36b;font-size:28px}
+.subtitle{color:#c7d2e4}
+.card{
+ background:#102747;border:1px solid #d6ae52;
+ border-radius:15px;padding:18px;margin:18px 0;
+}
+h2{color:#e5c36b}
+input,button{
+ width:100%;padding:13px;margin:7px 0;
+ border-radius:8px;border:0;font-size:16px;
+}
+input{background:#fff;color:#111}
+button{
+ background:#d6ae52;color:#07152f;
+ font-weight:bold;cursor:pointer;
+}
+button:disabled{opacity:.5}
+#messages{
+ height:250px;overflow-y:auto;
+ background:#07152f;padding:12px;border-radius:9px;
+}
+.message{padding:8px;border-bottom:1px solid #34445c}
+#app{display:none}
+#status{color:#e5c36b}
+footer{
+ text-align:center;margin-top:35px;
+ padding:20px;border-top:1px solid #d6ae52;
+ color:#e5c36b;line-height:2;
+}
+</style>
+</head>
+<body>
+
+<header>
+<h1>شعبة فاء العظيمة</h1>
+<p class="subtitle">معاً نحو التميز والنجاح</p>
+</header>
+
+<section class="card" id="login">
+<h2>🔐 تسجيل الدخول</h2>
+<input id="email" type="email" placeholder="البريد الإلكتروني">
+<input id="password" type="password" placeholder="كلمة المرور">
+<button id="loginBtn">دخول</button>
+<p id="loginStatus"></p>
+</section>
+
+<main id="app">
+<section class="card">
+<h2>أهلاً بك في شعبة فاء</h2>
+<p id="accountInfo"></p>
+<button id="logoutBtn">تسجيل الخروج</button>
+</section>
+
+<section class="card">
+<h2>💬 دردشة الشعبة</h2>
+<div id="messages">جاري تحميل الرسائل...</div>
+<input id="chatText" maxlength="500"
+placeholder="اكتب رسالتك...">
+<button id="sendBtn">إرسال الرسالة</button>
+<p id="chatStatus"></p>
+</section>
+</main>
+
+<footer>
+<p>تطوير وبرمجة</p>
+<strong>محمد باقر خيرالله جاسم</strong>
+</footer>
+
+<script type="module">
+import {initializeApp}
+from "https://www.gstatic.com/firebasejs/11.6.0/firebase-app.js";
+
+import {
+ getAuth,onAuthStateChanged,signInWithEmailAndPassword,signOut
+} from "https://www.gstatic.com/firebasejs/11.6.0/firebase-auth.js";
+
+import {
+ getFirestore,doc,getDoc,collection,addDoc,
+ query,orderBy,limit,onSnapshot,serverTimestamp
+} from "https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js";
+
+const firebaseConfig = {
+ apiKey: "AIzaSyBpYhM-czPBHGVWJ3BYDoVA7jCS3G5nbIQ",
+ authDomain: "fa-class-app.firebaseapp.com",
+ projectId: "fa-class-app",
+ storageBucket: "fa-class-app.firebasestorage.app",
+ messagingSenderId: "657366801476",
+ appId: "1:657366801476:web:a6551d985116c0ca5c7011"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+
+const loginBox = document.getElementById("login");
+const appBox = document.getElementById("app");
+const loginStatus = document.getElementById("loginStatus");
+const chatStatus = document.getElementById("chatStatus");
+const messagesBox = document.getElementById("messages");
+
+let currentProfile = null;
+let stopMessages = null;
+
+document.getElementById("loginBtn").onclick = async () => {
+ const email = document.getElementById("email").value.trim();
+ const password = document.getElementById("password").value;
+
+ if(!email || !password){
+  loginStatus.textContent = "أدخل البريد وكلمة المرور.";
+  return;
+ }
+
+ try{
+  loginStatus.textContent = "جارٍ تسجيل الدخول...";
+  await signInWithEmailAndPassword(auth,email,password);
+ }catch(error){
+  loginStatus.textContent = "تعذر تسجيل الدخول. تحقق من بياناتك.";
+ }
+};
+
+onAuthStateChanged(auth,async user=>{
+ if(stopMessages){
+  stopMessages();
+  stopMessages = null;
+ }
+
+ currentProfile = null;
+ appBox.style.display = "none";
+ loginBox.style.display = "block";
+
+ if(!user) return;
+
+ try{
+  const profileRef = doc(db,"users",user.uid);
+  const profileSnap = await getDoc(profileRef);
+
+  if(!profileSnap.exists()){
+   await signOut(auth);
+   loginStatus.textContent = "هذا الحساب غير مسجل في الشعبة.";
+   return;
+  }
+
+  const profile = profileSnap.data();
+
+  if(!["admin","teacher","student"].includes(profile.role)){
+   await signOut(auth);
+   loginStatus.textContent = "ليس لديك تصريح للدخول.";
+   return;
+  }
+
+  currentProfile = profile;
+  loginBox.style.display = "none";
+  appBox.style.display = "block";
+
+  const roleNames = {
+   admin:"المدير",
+   teacher:"المدرس",
+   student:"الطالب"
+  };
+
+  document.getElementById("accountInfo").textContent =
+   "صلاحيتك: " + roleNames[profile.role];
+
+  loadMessages();
+
+ }catch(error){
+  await signOut(auth);
+  loginStatus.textContent = "تعذر التحقق من الحساب. راجع إعدادات الأمان.";
+ }
+});
+
+function loadMessages(){
+ const q = query(
+  collection(db,"messages"),
+  orderBy("createdAt","asc"),
+  limit(100)
+ );
+
+ stopMessages = onSnapshot(q,snapshot=>{
+  messagesBox.replaceChildren();
+
+  snapshot.forEach(messageDoc=>{
+   const data = messageDoc.data();
+   const item = document.createElement("div");
+   item.className = "message";
+   item.textContent =
+    (data.name || "عضو الشعبة") + ": " + (data.text || "");
+   messagesBox.appendChild(item);
+  });
+
+  messagesBox.scrollTop = messagesBox.scrollHeight;
+
+ },error=>{
+  chatStatus.textContent = "تعذر تحميل الرسائل.";
+ });
+}
+
+document.getElementById("sendBtn").onclick = async()=>{
+ const text = document.getElementById("chatText").value.trim();
+
+ if(!auth.currentUser || !currentProfile || !text) return;
+
+ if(text.length > 500){
+  chatStatus.textContent = "الرسالة طويلة جداً.";
+  return;
+ }
+
+ try{
+  await addDoc(collection(db,"messages"),{
+   name: currentProfile.name ||
+    (currentProfile.role === "admin" ? "المدير" :
+     currentProfile.role === "teacher" ? "مدرس" : "طالب"),
+   text,
+   createdAt:serverTimestamp()
+  });
+
+  document.getElementById("chatText").value = "";
+  chatStatus.textContent = "تم إرسال الرسالة.";
+
+ }catch(error){
+  chatStatus.textContent = "تعذر الإرسال. تحقق من قواعد الأمان.";
+ }
+};
+
+document.getElementById("logoutBtn").onclick = async()=>{
+ await signOut(auth);
+};
+</script>
+</body>
+</html>
+ 
 </body>
 </html>
