@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
@@ -5,108 +6,249 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#07152f">
 <title>شعبة فاء العظيمة</title>
+
 <style>
 *{box-sizing:border-box}
-body{margin:0;background:#07152f;color:#fff;font-family:Tahoma,Arial,sans-serif}
-header{text-align:center;padding:28px 12px;background:linear-gradient(135deg,#10294c,#07152f);border-bottom:2px solid #d6ae52}
+body{
+ margin:0;
+ background:#07152f;
+ color:white;
+ font-family:Tahoma,Arial,sans-serif;
+}
+header{
+ text-align:center;
+ padding:25px 12px;
+ background:linear-gradient(135deg,#10294c,#07152f);
+ border-bottom:2px solid #d6ae52;
+}
 h1,h2,h3{color:#e5c36b}
 main{max-width:750px;margin:auto;padding:16px}
-.card,.section{background:#102747;border:1px solid #b9974b;border-radius:14px;padding:18px;margin:14px 0}
-.cards{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.tile{background:#102747;border:1px solid #d6ae52;border-radius:12px;padding:20px 8px;color:#f0d58e;text-align:center;cursor:pointer}
+.card,.section{
+ background:#102747;
+ border:1px solid #b9974b;
+ border-radius:14px;
+ padding:18px;
+ margin:14px 0;
+}
+.cards{
+ display:grid;
+ grid-template-columns:1fr 1fr;
+ gap:10px;
+}
+.tile{
+ background:#102747;
+ border:1px solid #d6ae52;
+ border-radius:12px;
+ padding:20px 8px;
+ color:#f0d58e;
+ text-align:center;
+ cursor:pointer;
+ font:inherit;
+}
 .tile span{display:block;font-size:26px;margin-bottom:8px}
-.section{display:none}.section.active{display:block}
-input,textarea{width:100%;padding:12px;margin:8px 0;border-radius:8px;border:1px solid #d6ae52;background:#07152f;color:white;font:inherit}
+.section{display:none}
+.section.active{display:block}
+input,textarea{
+ width:100%;
+ padding:12px;
+ margin:8px 0;
+ border-radius:8px;
+ border:1px solid #d6ae52;
+ background:#07152f;
+ color:white;
+ font:inherit;
+}
 textarea{min-height:120px;resize:vertical}
-button{background:#d6ae52;color:#07152f;border:0;border-radius:9px;padding:12px 17px;font-weight:bold;cursor:pointer;margin:5px 0}
+button{
+ background:#d6ae52;
+ color:#07152f;
+ border:0;
+ border-radius:9px;
+ padding:12px 17px;
+ font-weight:bold;
+ cursor:pointer;
+ margin:5px 0;
+}
 button.secondary{background:#344b6b;color:white}
 button.danger{background:#a94444;color:white}
-.item{background:#07152f;border:1px solid #34445c;padding:12px;border-radius:9px;margin:10px 0;white-space:pre-wrap;overflow-wrap:anywhere}
-.muted{color:#bdc8d8}.status{color:#e5c36b;min-height:22px}
+.item{
+ background:#07152f;
+ border:1px solid #34445c;
+ padding:12px;
+ border-radius:9px;
+ margin:10px 0;
+ white-space:pre-wrap;
+ overflow-wrap:anywhere;
+}
+.muted{color:#bdc8d8}
+.status{color:#e5c36b;min-height:22px}
 #app{display:none}
-footer{text-align:center;padding:25px;color:#d6ae52;border-top:1px solid #b9974b;margin-top:25px;line-height:2}
-@media(max-width:400px){.tile{font-size:13px}}
+footer{
+ text-align:center;
+ padding:25px;
+ color:#d6ae52;
+ border-top:1px solid #b9974b;
+ margin-top:25px;
+ line-height:2;
+}
+@media(max-width:400px){
+ .tile{font-size:13px}
+}
 </style>
 </head>
+
 <body>
+
 <header>
- <div style="font-size:38px">👑</div>
+ <div style="font-size:40px">👑</div>
  <h1>شعبة فاء العظيمة</h1>
  <p>الرابع العلمي | العلم والطموح والتميز</p>
 </header>
+
 <main>
+
+<!-- تسجيل الدخول -->
 <section class="card" id="login">
  <h2>🔐 تسجيل الدخول</h2>
- <input id="email" type="email" placeholder="البريد الإلكتروني" autocomplete="username">
- <input id="password" type="password" placeholder="كلمة المرور" autocomplete="current-password">
+ <input id="email" type="email"
+ placeholder="البريد الإلكتروني"
+ autocomplete="username">
+
+ <input id="password" type="password"
+ placeholder="كلمة المرور"
+ autocomplete="current-password">
+
  <button id="loginBtn">تسجيل الدخول</button>
  <p class="status" id="loginStatus"></p>
 </section>
 
+<!-- التطبيق -->
 <div id="app">
+
  <section class="card">
   <h2>أهلاً بك في شعبة فاء</h2>
   <p id="accountInfo"></p>
-  <button class="secondary" id="logoutBtn">تسجيل الخروج</button>
+  <button class="secondary" id="logoutBtn">
+   تسجيل الخروج
+  </button>
  </section>
 
  <h2>القائمة الرئيسية</h2>
+
  <div class="cards">
-  <button class="tile" onclick="showSection('homework')"><span>📚</span>الواجبات</button>
-  <button class="tile" onclick="showSection('schedule')"><span>📅</span>الجدول الدراسي</button>
-  <button class="tile" onclick="showSection('news')"><span>📢</span>الإعلانات</button>
-  <button class="tile" onclick="showSection('chat')"><span>💬</span>المحادثات</button>
-  <button class="tile" onclick="showSection('memories')"><span>📸</span>الذكريات</button>
-  <button class="tile" onclick="showSection('honor')"><span>🏆</span>لوحة الشرف</button>
+  <button class="tile" onclick="showSection('homework')">
+   <span>📚</span>الواجبات
+  </button>
+
+  <button class="tile" onclick="showSection('schedule')">
+   <span>📅</span>الجدول الدراسي
+  </button>
+
+  <button class="tile" onclick="showSection('news')">
+   <span>📢</span>الإعلانات
+  </button>
+
+  <button class="tile" onclick="showSection('chat')">
+   <span>💬</span>المحادثات
+  </button>
+
+  <button class="tile" onclick="showSection('memories')">
+   <span>📸</span>الذكريات
+  </button>
+
+  <button class="tile" onclick="showSection('honor')">
+   <span>🏆</span>لوحة الشرف
+  </button>
  </div>
 
+ <!-- الواجبات -->
  <section id="homework" class="section">
   <h2>📚 الواجبات</h2>
-  <p class="muted">سيتم تفعيل نشر الواجبات في مرحلة لاحقة.</p>
+  <p class="muted">
+   قسم الواجبات قيد التفعيل وسيتم إطلاقه لاحقاً.
+  </p>
  </section>
 
+ <!-- الجدول -->
  <section id="schedule" class="section">
   <h2>📅 الجدول الدراسي</h2>
-  <div id="scheduleList">جارٍ تحميل الجدول...</div>
+
+  <div id="scheduleList">
+   جارٍ تحميل الجدول...
+  </div>
+
   <div id="scheduleEditor" style="display:none">
    <hr style="border-color:#b9974b">
+
    <h3>إضافة أو تعديل الجدول</h3>
-   <input id="scheduleTitle" maxlength="100" placeholder="عنوان الجدول">
-   <textarea id="scheduleContent" maxlength="5000" placeholder="اكتب أيام الأسبوع والحصص هنا..."></textarea>
+
+   <input id="scheduleTitle"
+   maxlength="100"
+   placeholder="عنوان الجدول">
+
+   <textarea id="scheduleContent"
+   maxlength="5000"
+   placeholder="اكتب أيام الأسبوع والحصص هنا..."></textarea>
+
    <button id="saveSchedule">حفظ الجدول</button>
    <button class="danger" id="deleteSchedule">حذف الجدول</button>
+
    <p id="scheduleStatus" class="status"></p>
   </div>
  </section>
 
+ <!-- الإعلانات -->
  <section id="news" class="section">
   <h2>📢 الإعلانات</h2>
-  <p class="muted">سيتم تفعيل نشر الإعلانات في مرحلة لاحقة.</p>
+  <p class="muted">
+   قسم الإعلانات قيد التفعيل وسيتم إطلاقه لاحقاً.
+  </p>
  </section>
 
+ <!-- الدردشة -->
  <section id="chat" class="section">
   <h2>💬 دردشة الشعبة</h2>
-  <div id="messages" style="height:250px;overflow-y:auto">جارٍ تحميل الرسائل...</div>
-  <textarea id="chatText" maxlength="500" placeholder="اكتب رسالتك..."></textarea>
+
+  <div id="messages"
+  style="height:250px;overflow-y:auto">
+   جارٍ تحميل الرسائل...
+  </div>
+
+  <textarea id="chatText"
+  maxlength="500"
+  placeholder="اكتب رسالتك..."></textarea>
+
   <button id="sendBtn">إرسال الرسالة</button>
   <p id="chatStatus" class="status"></p>
  </section>
 
+ <!-- الذكريات -->
  <section id="memories" class="section">
   <h2>📸 الذكريات</h2>
-  <p class="muted">سيتم تفعيل قسم الذكريات لاحقاً.</p>
+  <p class="muted">
+   قسم الذكريات قيد التفعيل وسيتم إطلاقه لاحقاً.
+  </p>
  </section>
 
+ <!-- لوحة الشرف -->
  <section id="honor" class="section">
   <h2 style="text-align:center">🏆 لوحة الشرف</h2>
+
   <div class="item" style="text-align:center">
-   <div style="font-size:48px">👑</div>
-   <h2>أفضل طالب للسنة الماضية</h2>
+   <div style="font-size:55px">👑</div>
+
+   <h2>الطالب الأول على الشعبة</h2>
+
    <h2>حسين خلف فيصل</h2>
-   <p style="color:#e5c36b">العرّاب</p>
-   <p>تكريماً لتميزه في السنة الماضية.</p>
+
+   <h3>اللقب: المبعوث الأموي (العرّاب)</h3>
+
+   <p style="color:#e5c36b">
+    تكريماً للتميز والتفوق الدراسي.
+   </p>
   </div>
  </section>
+
 </div>
 </main>
 
@@ -118,177 +260,364 @@ footer{text-align:center;padding:25px;color:#d6ae52;border-top:1px solid #b9974b
 
 <script>
 function showSection(id){
- document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
- document.getElementById(id).classList.add('active');
+ document.querySelectorAll('.section')
+ .forEach(s=>s.classList.remove('active'));
+
+ document.getElementById(id)
+ .classList.add('active');
 }
 </script>
 
 <script type="module">
-import {initializeApp} from "https://www.gstatic.com/firebasejs/11.6.0/firebase-app.js";
-import {getAuth,onAuthStateChanged,signInWithEmailAndPassword,signOut}
- from "https://www.gstatic.com/firebasejs/11.6.0/firebase-auth.js";
-import {
- getFirestore,doc,getDoc,collection,addDoc,setDoc,deleteDoc,
- query,orderBy,limit,onSnapshot,serverTimestamp
-} from "https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js";
 
+import {initializeApp}
+from "https://www.gstatic.com/firebasejs/11.6.0/firebase-app.js";
+
+import {
+ getAuth,
+ onAuthStateChanged,
+ signInWithEmailAndPassword,
+ signOut
+}
+from "https://www.gstatic.com/firebasejs/11.6.0/firebase-auth.js";
+
+import {
+ getFirestore,
+ doc,
+ getDoc,
+ collection,
+ addDoc,
+ setDoc,
+ deleteDoc,
+ query,
+ orderBy,
+ limit,
+ onSnapshot,
+ serverTimestamp
+}
+from "https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js";
+
+// Firebase configuration
 const firebaseConfig = {
- apiKey: "AIzaSyBpYhM-czPBHGVWJ3BYDoVA7jCS3G5N",
+ apiKey: "AIzaSyBpYhM-czPBHGVWJ3BYDoVA7jCS3G5nbIQ",
  authDomain: "fa-class-app.firebaseapp.com",
  projectId: "fa-class-app",
  storageBucket: "fa-class-app.firebasestorage.app",
  messagingSenderId: "657366801476",
- appId: "1:657366801476:web:a6551d985116c0ca5c7011"
+ appId: "1:657366801476:web:d116b7146815d3db5c7011"
 };
 
+// Initialize Firebase
 const firebaseApp = initializeApp(firebaseConfig);
 const auth = getAuth(firebaseApp);
 const db = getFirestore(firebaseApp);
 
 const $ = id => document.getElementById(id);
+
 let profile = null;
 let stopMessages = null;
 let stopSchedule = null;
 
+// Login
 $('loginBtn').addEventListener('click',async()=>{
- const email=$('email').value.trim();
- const password=$('password').value;
- if(!email||!password){$('loginStatus').textContent='أدخل البريد وكلمة المرور.';return;}
- $('loginStatus').textContent='جارٍ تسجيل الدخول...';
+
+ const email = $('email').value.trim();
+ const password = $('password').value;
+
+ if(!email || !password){
+  $('loginStatus').textContent =
+  'أدخل البريد الإلكتروني وكلمة المرور.';
+  return;
+ }
+
+ $('loginStatus').textContent =
+ 'جارٍ تسجيل الدخول...';
+
  try{
   await signInWithEmailAndPassword(auth,email,password);
+
  }catch(error){
-  $('loginStatus').textContent='تعذر تسجيل الدخول. تحقق من البيانات.';
+
   console.error(error);
+
+  const errors = {
+   'auth/invalid-credential':
+   'البريد الإلكتروني أو كلمة المرور غير صحيحة.',
+   'auth/user-not-found':
+   'الحساب غير موجود.',
+   'auth/wrong-password':
+   'كلمة المرور غير صحيحة.',
+   'auth/invalid-email':
+   'صيغة البريد الإلكتروني غير صحيحة.',
+   'auth/too-many-requests':
+   'محاولات كثيرة. حاول لاحقاً.',
+   'auth/network-request-failed':
+   'تحقق من اتصال الإنترنت.'
+  };
+
+  $('loginStatus').textContent =
+  errors[error.code] ||
+  'تعذر تسجيل الدخول. رمز الخطأ: '+error.code;
  }
 });
 
+// Check authentication and permissions
 onAuthStateChanged(auth,async user=>{
- if(stopMessages){stopMessages();stopMessages=null;}
- if(stopSchedule){stopSchedule();stopSchedule=null;}
+
+ if(stopMessages){
+  stopMessages();
+  stopMessages=null;
+ }
+
+ if(stopSchedule){
+  stopSchedule();
+  stopSchedule=null;
+ }
+
  profile=null;
+
  $('app').style.display='none';
  $('login').style.display='block';
+
  if(!user)return;
 
  try{
-  const snap=await getDoc(doc(db,'users',user.uid));
-  if(!snap.exists())throw new Error('ملف المستخدم غير موجود');
-  const data=snap.data();
-  if(!['admin','teacher','student'].includes(data.role))throw new Error('صلاحية غير معروفة');
+
+  const snap = await getDoc(
+   doc(db,'users',user.uid)
+  );
+
+  if(!snap.exists()){
+   throw new Error('ملف المستخدم غير موجود في users.');
+  }
+
+  const data = snap.data();
+
+  if(!['admin','teacher','student'].includes(data.role)){
+   throw new Error('صلاحية الحساب غير معروفة.');
+  }
 
   profile=data;
+
   $('login').style.display='none';
   $('app').style.display='block';
-  const roleNames={admin:'المدير',teacher:'المدرس',student:'الطالب'};
-  $('accountInfo').textContent='صلاحيتك: '+roleNames[data.role];
 
-  const staff=['admin','teacher'].includes(data.role);
-  $('scheduleEditor').style.display=staff?'block':'none';
+  const roleNames = {
+   admin:'المدير',
+   teacher:'المدرس',
+   student:'الطالب'
+  };
+
+  $('accountInfo').textContent =
+  'صلاحيتك: '+roleNames[data.role];
+
+  const staff =
+  ['admin','teacher'].includes(data.role);
+
+  $('scheduleEditor').style.display =
+  staff ? 'block' : 'none';
 
   loadMessages();
   loadSchedule();
+
  }catch(error){
+
   console.error(error);
+
+  $('loginStatus').textContent =
+  'تعذر التحقق من الحساب: '+error.message;
+
   await signOut(auth);
-  $('loginStatus').textContent='تعذر التحقق من الحساب. راجع إعدادات الأمان.';
  }
 });
 
+// Chat messages
 function loadMessages(){
- const q=query(collection(db,'messages'),orderBy('createdAt','asc'),limit(100));
- stopMessages=onSnapshot(q,snapshot=>{
+
+ const q = query(
+  collection(db,'messages'),
+  orderBy('createdAt','asc'),
+  limit(100)
+ );
+
+ stopMessages = onSnapshot(q,snapshot=>{
+
   $('messages').replaceChildren();
+
   snapshot.forEach(messageDoc=>{
+
    const data=messageDoc.data();
+
    const item=document.createElement('div');
    item.className='item';
-   item.textContent=(data.name||'عضو الشعبة')+': '+(data.text||'');
+
+   item.textContent =
+   (data.name||'عضو الشعبة')+': '+(data.text||'');
+
    $('messages').appendChild(item);
   });
-  $('messages').scrollTop=$('messages').scrollHeight;
+
+  $('messages').scrollTop =
+  $('messages').scrollHeight;
+
  },error=>{
-  $('chatStatus').textContent='تعذر تحميل الرسائل.';
+
+  $('chatStatus').textContent =
+  'تعذر تحميل الرسائل.';
+
   console.error(error);
  });
 }
 
+// Send message
 $('sendBtn').addEventListener('click',async()=>{
+
  const text=$('chatText').value.trim();
- if(!profile||!text)return;
+
+ if(!profile || !text)return;
+
  try{
+
   await addDoc(collection(db,'messages'),{
-   name:profile.name||(profile.role==='admin'?'المدير':profile.role==='teacher'?'مدرس':'طالب'),
-   text,
+
+   name:
+   profile.name ||
+   (profile.role==='admin'?'المدير':
+    profile.role==='teacher'?'مدرس':'طالب'),
+
+   text:text,
+
    createdAt:serverTimestamp()
   });
+
   $('chatText').value='';
   $('chatStatus').textContent='تم إرسال الرسالة.';
+
  }catch(error){
-  $('chatStatus').textContent='تعذر الإرسال. تحقق من قواعد الأمان.';
+
+  $('chatStatus').textContent =
+  'تعذر الإرسال. تحقق من قواعد الأمان.';
+
   console.error(error);
  }
 });
 
+// Load schedule
 function loadSchedule(){
+
  const scheduleRef=doc(db,'schedule','weekly');
+
  stopSchedule=onSnapshot(scheduleRef,snap=>{
+
   $('scheduleList').replaceChildren();
+
   if(!snap.exists()){
-   $('scheduleList').textContent='لا يوجد جدول منشور حالياً.';
+
+   $('scheduleList').textContent =
+   'لا يوجد جدول منشور حالياً.';
+
    return;
   }
+
   const data=snap.data();
+
   const title=document.createElement('h3');
   title.textContent=data.title||'الجدول الدراسي';
+
   const content=document.createElement('div');
   content.className='item';
-  content.textContent=data.content||'لم تتم إضافة تفاصيل الجدول بعد.';
+  content.textContent=
+  data.content||'لم تتم إضافة تفاصيل الجدول بعد.';
+
   $('scheduleList').append(title,content);
-  if(profile&&['admin','teacher'].includes(profile.role)){
-   $('scheduleTitle').value=data.title||'الجدول الدراسي';
-   $('scheduleContent').value=data.content||'';
+
+  if(profile && ['admin','teacher'].includes(profile.role)){
+
+   $('scheduleTitle').value =
+   data.title||'الجدول الدراسي';
+
+   $('scheduleContent').value =
+   data.content||'';
   }
+
  },error=>{
-  $('scheduleList').textContent='تعذر تحميل الجدول. تحقق من قواعد الأمان.';
+
+  $('scheduleList').textContent =
+  'تعذر تحميل الجدول. تحقق من قواعد الأمان.';
+
   console.error(error);
  });
 }
 
+// Save schedule
 $('saveSchedule').addEventListener('click',async()=>{
- if(!profile||!['admin','teacher'].includes(profile.role))return;
+
+ if(!profile || !['admin','teacher'].includes(profile.role))return;
+
  const title=$('scheduleTitle').value.trim();
  const content=$('scheduleContent').value.trim();
- if(!title||!content){
-  $('scheduleStatus').textContent='اكتب عنوان الجدول ومحتواه أولاً.';
+
+ if(!title || !content){
+
+  $('scheduleStatus').textContent =
+  'اكتب عنوان الجدول ومحتواه أولاً.';
+
   return;
  }
+
  try{
+
   await setDoc(doc(db,'schedule','weekly'),{
-   title,content,updatedAt:serverTimestamp(),updatedBy:auth.currentUser.uid
+
+   title,
+   content,
+   updatedAt:serverTimestamp(),
+   updatedBy:auth.currentUser.uid
+
   });
-  $('scheduleStatus').textContent='تم حفظ الجدول بنجاح.';
+
+  $('scheduleStatus').textContent =
+  'تم حفظ الجدول بنجاح.';
+
  }catch(error){
-  $('scheduleStatus').textContent='تعذر حفظ الجدول. تحقق من قواعد الأمان.';
+
+  $('scheduleStatus').textContent =
+  'تعذر حفظ الجدول. تحقق من قواعد الأمان.';
+
   console.error(error);
  }
 });
 
+// Delete schedule
 $('deleteSchedule').addEventListener('click',async()=>{
- if(!profile||!['admin','teacher'].includes(profile.role))return;
+
+ if(!profile || !['admin','teacher'].includes(profile.role))return;
+
  if(!confirm('هل تريد حذف الجدول الحالي؟'))return;
+
  try{
+
   await deleteDoc(doc(db,'schedule','weekly'));
-  $('scheduleStatus').textContent='تم حذف الجدول.';
+
+  $('scheduleStatus').textContent =
+  'تم حذف الجدول.';
+
   $('scheduleTitle').value='';
   $('scheduleContent').value='';
+
  }catch(error){
-  $('scheduleStatus').textContent='تعذر حذف الجدول.';
+
+  $('scheduleStatus').textContent =
+  'تعذر حذف الجدول.';
+
   console.error(error);
  }
 });
 
+// Logout
 $('logoutBtn').addEventListener('click',()=>signOut(auth));
+
 </script>
+
 </body>
 </html>
