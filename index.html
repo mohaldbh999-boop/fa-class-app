@@ -3,7 +3,7 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#07152f">
 <title>شعبة فاء العظيمة</title>
 
@@ -11,262 +11,249 @@
 *{box-sizing:border-box}
 body{
  margin:0;
- background:#07152f;
- color:white;
  font-family:Tahoma,Arial,sans-serif;
+ background:#07152f;
+ color:#f4f0df;
 }
 header{
+ background:linear-gradient(135deg,#142d53,#07152f);
  text-align:center;
  padding:25px 12px;
- background:linear-gradient(135deg,#10294c,#07152f);
- border-bottom:2px solid #d6ae52;
+ border-bottom:2px solid #c6a34a;
 }
-h1,h2,h3{color:#e5c36b}
-main{max-width:750px;margin:auto;padding:16px}
-.card,.section{
- background:#102747;
- border:1px solid #b9974b;
+header h1{color:#e3c36c;margin:5px}
+header p{color:#d5dbea}
+.container{max-width:900px;margin:auto;padding:14px}
+.card{
+ background:#102344;
+ border:1px solid #b99748;
  border-radius:14px;
- padding:18px;
- margin:14px 0;
+ padding:17px;
+ margin:13px 0;
 }
-.cards{
- display:grid;
- grid-template-columns:1fr 1fr;
- gap:10px;
-}
-.tile{
- background:#102747;
- border:1px solid #d6ae52;
- border-radius:12px;
- padding:20px 8px;
- color:#f0d58e;
- text-align:center;
- cursor:pointer;
- font:inherit;
-}
-.tile span{display:block;font-size:26px;margin-bottom:8px}
-.section{display:none}
-.section.active{display:block}
+h2,h3{color:#e3c36c}
 input,textarea{
  width:100%;
  padding:12px;
- margin:8px 0;
+ margin:7px 0;
+ border:1px solid #b99748;
  border-radius:8px;
- border:1px solid #d6ae52;
  background:#07152f;
  color:white;
- font:inherit;
+ font-family:inherit;
 }
-textarea{min-height:120px;resize:vertical}
+textarea{min-height:90px;resize:vertical}
 button{
- background:#d6ae52;
+ background:#c6a34a;
  color:#07152f;
  border:0;
- border-radius:9px;
- padding:12px 17px;
+ padding:11px 15px;
+ margin:5px 2px;
+ border-radius:8px;
  font-weight:bold;
+ font-family:inherit;
  cursor:pointer;
- margin:5px 0;
 }
-button.secondary{background:#344b6b;color:white}
-button.danger{background:#a94444;color:white}
+button.secondary{background:#263d60;color:white}
+button.danger{background:#a63e45;color:white}
+button:disabled{opacity:.5}
+nav{
+ display:flex;
+ flex-wrap:wrap;
+ justify-content:center;
+ gap:5px;
+ margin:15px 0;
+}
+nav button{flex:1;min-width:100px}
+.section{display:none}
+.section.active{display:block}
 .item{
- background:#07152f;
- border:1px solid #34445c;
- padding:12px;
- border-radius:9px;
+ background:#0a1933;
+ border:1px solid #344a69;
+ border-radius:10px;
+ padding:13px;
  margin:10px 0;
- white-space:pre-wrap;
  overflow-wrap:anywhere;
 }
-.muted{color:#bdc8d8}
-.status{color:#e5c36b;min-height:22px}
-#app{display:none}
+.item p{white-space:pre-wrap;line-height:1.8}
+.item small{color:#c6a34a}
+.muted{color:#b8c3d4;font-size:13px}
+#status{
+ color:#e3c36c;
+ text-align:center;
+ white-space:pre-wrap;
+}
+#chatMessages{
+ height:330px;
+ overflow-y:auto;
+ background:#07152f;
+ padding:10px;
+ border-radius:10px;
+}
+.message{
+ background:#173357;
+ padding:10px;
+ border-radius:10px;
+ margin:8px 0;
+ overflow-wrap:anywhere;
+}
+.message strong{color:#e3c36c}
+.message p{white-space:pre-wrap}
 footer{
  text-align:center;
- padding:25px;
- color:#d6ae52;
- border-top:1px solid #b9974b;
+ color:#b8c3d4;
+ padding:25px 10px;
+ border-top:1px solid #344a69;
  margin-top:25px;
- line-height:2;
+ line-height:1.8;
 }
-@media(max-width:400px){
- .tile{font-size:13px}
-}
+.hidden{display:none!important}
+hr{border:0;border-top:1px solid #344a69}
 </style>
 </head>
 
 <body>
 
 <header>
- <div style="font-size:40px">👑</div>
  <h1>شعبة فاء العظيمة</h1>
- <p>الرابع العلمي | العلم والطموح والتميز</p>
+ <p>الرابع العلمي | العلم طريق النجاح</p>
 </header>
 
-<main>
+<div class="container">
 
-<!-- تسجيل الدخول -->
-<section class="card" id="login">
- <h2>🔐 تسجيل الدخول</h2>
- <input id="email" type="email"
- placeholder="البريد الإلكتروني"
- autocomplete="username">
+ <div class="card" id="loginBox">
+  <h2>مرحباً بك</h2>
+  <p class="muted">اختر طريقة الدخول</p>
 
- <input id="password" type="password"
- placeholder="كلمة المرور"
- autocomplete="current-password">
+  <div>
+   <h3>دخول المدير</h3>
+   <input id="adminEmail" type="email" placeholder="البريد الإلكتروني">
+   <input id="adminPassword" type="password" placeholder="كلمة المرور">
+   <button id="adminLoginBtn">دخول المدير</button>
+  </div>
 
- <button id="loginBtn">تسجيل الدخول</button>
- <p class="status" id="loginStatus"></p>
-</section>
+  <hr>
 
-<!-- التطبيق -->
-<div id="app">
-
- <section class="card">
-  <h2>أهلاً بك في شعبة فاء</h2>
-  <p id="accountInfo"></p>
-  <button class="secondary" id="logoutBtn">
-   تسجيل الخروج
-  </button>
- </section>
-
- <h2>القائمة الرئيسية</h2>
-
- <div class="cards">
-  <button class="tile" onclick="showSection('homework')">
-   <span>📚</span>الواجبات
-  </button>
-
-  <button class="tile" onclick="showSection('schedule')">
-   <span>📅</span>الجدول الدراسي
-  </button>
-
-  <button class="tile" onclick="showSection('news')">
-   <span>📢</span>الإعلانات
-  </button>
-
-  <button class="tile" onclick="showSection('chat')">
-   <span>💬</span>المحادثات
-  </button>
-
-  <button class="tile" onclick="showSection('memories')">
-   <span>📸</span>الذكريات
-  </button>
-
-  <button class="tile" onclick="showSection('honor')">
-   <span>🏆</span>لوحة الشرف
-  </button>
+  <div>
+   <h3>دخول الطلاب</h3>
+   <input id="studentName" maxlength="30" placeholder="اكتب اسمك للدردشة">
+   <button id="studentLoginBtn">دخول الطلاب</button>
+  </div>
  </div>
 
- <!-- الواجبات -->
- <section id="homework" class="section">
-  <h2>📚 الواجبات</h2>
-  <p class="muted">
-   قسم الواجبات قيد التفعيل وسيتم إطلاقه لاحقاً.
-  </p>
- </section>
+ <div id="app" class="hidden">
 
- <!-- الجدول -->
- <section id="schedule" class="section">
-  <h2>📅 الجدول الدراسي</h2>
-
-  <div id="scheduleList">
-   جارٍ تحميل الجدول...
+  <div class="card">
+   <div id="welcome"></div>
+   <button class="secondary" id="logoutBtn">تسجيل الخروج</button>
   </div>
 
-  <div id="scheduleEditor" style="display:none">
-   <hr style="border-color:#b9974b">
+  <nav>
+   <button data-page="home">الرئيسية</button>
+   <button data-page="schedule">الجدول</button>
+   <button data-page="homework">الواجبات</button>
+   <button data-page="announcements">الإعلانات</button>
+   <button data-page="chat">الدردشة</button>
+   <button data-page="honor">لوحة الشرف</button>
+   <button data-page="memories">الذكريات</button>
+  </nav>
 
-   <h3>إضافة أو تعديل الجدول</h3>
+  <section class="section active" id="home">
+   <div class="card">
+    <h2>أهلاً بكم في شعبة فاء العظيمة</h2>
+    <p>من هنا تتابعون أخبار الشعبة والواجبات والجدول الدراسي.</p>
+    <p class="muted">نتمنى لكم عاماً دراسياً مليئاً بالنجاح والتفوق.</p>
+   </div>
+  </section>
 
-   <input id="scheduleTitle"
-   maxlength="100"
-   placeholder="عنوان الجدول">
+  <section class="section" id="schedule">
+   <div class="card">
+    <h2>الجدول الدراسي</h2>
+    <div id="scheduleContent">جاري تحميل الجدول...</div>
 
-   <textarea id="scheduleContent"
-   maxlength="5000"
-   placeholder="اكتب أيام الأسبوع والحصص هنا..."></textarea>
+    <div id="scheduleEditor" class="hidden">
+     <hr>
+     <h3>تعديل الجدول</h3>
+     <input id="scheduleTitle" placeholder="عنوان الجدول">
+     <textarea id="scheduleText" placeholder="اكتب الجدول الدراسي هنا"></textarea>
+     <button id="saveSchedule">حفظ الجدول</button>
+    </div>
+   </div>
+  </section>
 
-   <button id="saveSchedule">حفظ الجدول</button>
-   <button class="danger" id="deleteSchedule">حذف الجدول</button>
+  <section class="section" id="homework">
+   <div class="card">
+    <h2>الواجبات المدرسية</h2>
+    <div id="homeworkList">جاري تحميل الواجبات...</div>
 
-   <p id="scheduleStatus" class="status"></p>
-  </div>
- </section>
+    <div id="homeworkEditor" class="hidden">
+     <hr>
+     <h3 id="homeworkFormTitle">إضافة واجب</h3>
+     <input id="homeworkTitle" maxlength="100" placeholder="عنوان الواجب">
+     <textarea id="homeworkText" maxlength="2000" placeholder="تفاصيل الواجب"></textarea>
+     <button id="saveHomework">حفظ الواجب</button>
+     <button class="secondary" id="cancelHomework">إلغاء</button>
+    </div>
 
- <!-- الإعلانات -->
- <section id="news" class="section">
-  <h2>📢 الإعلانات</h2>
-  <p class="muted">
-   قسم الإعلانات قيد التفعيل وسيتم إطلاقه لاحقاً.
-  </p>
- </section>
+    <button id="addHomework" class="hidden">+ إضافة واجب</button>
+   </div>
+  </section>
 
- <!-- الدردشة -->
- <section id="chat" class="section">
-  <h2>💬 دردشة الشعبة</h2>
+  <section class="section" id="announcements">
+   <div class="card">
+    <h2>إعلانات الشعبة</h2>
+    <div id="announcementList">جاري تحميل الإعلانات...</div>
 
-  <div id="messages"
-  style="height:250px;overflow-y:auto">
-   جارٍ تحميل الرسائل...
-  </div>
+    <div id="announcementEditor" class="hidden">
+     <hr>
+     <h3 id="announcementFormTitle">إضافة إعلان</h3>
+     <input id="announcementTitle" maxlength="100" placeholder="عنوان الإعلان">
+     <textarea id="announcementText" maxlength="2000" placeholder="تفاصيل الإعلان"></textarea>
+     <button id="saveAnnouncement">نشر الإعلان</button>
+     <button class="secondary" id="cancelAnnouncement">إلغاء</button>
+    </div>
 
-  <textarea id="chatText"
-  maxlength="500"
-  placeholder="اكتب رسالتك..."></textarea>
+    <button id="addAnnouncement" class="hidden">+ إضافة إعلان</button>
+   </div>
+  </section>
 
-  <button id="sendBtn">إرسال الرسالة</button>
-  <p id="chatStatus" class="status"></p>
- </section>
+  <section class="section" id="chat">
+   <div class="card">
+    <h2>دردشة الشعبة</h2>
+    <p class="muted">يرجى احترام الجميع وعدم نشر معلومات شخصية.</p>
+    <div id="chatMessages"></div>
+    <textarea id="chatText" maxlength="500" placeholder="اكتب رسالتك هنا"></textarea>
+    <button id="sendMessage">إرسال الرسالة</button>
+   </div>
+  </section>
 
- <!-- الذكريات -->
- <section id="memories" class="section">
-  <h2>📸 الذكريات</h2>
-  <p class="muted">
-   قسم الذكريات قيد التفعيل وسيتم إطلاقه لاحقاً.
-  </p>
- </section>
+  <section class="section" id="honor">
+   <div class="card" style="text-align:center">
+    <h2>🏆 لوحة الشرف</h2>
+    <h3>الطالب الأول على الشعبة</h3>
+    <h2>حسين خلف فيصل</h2>
+    <p>اللقب: المبعوث الأموي (العرّاب)</p>
+   </div>
+  </section>
 
- <!-- لوحة الشرف -->
- <section id="honor" class="section">
-  <h2 style="text-align:center">🏆 لوحة الشرف</h2>
+  <section class="section" id="memories">
+   <div class="card">
+    <h2>📸 ذكريات الشعبة</h2>
+    <p>مساحة لذكريات وأجمل لحظات الشعبة.</p>
+    <p class="muted">إضافة الصور تحتاج إعداد Firebase Storage، وهي غير مفعّلة في هذه النسخة.</p>
+   </div>
+  </section>
 
-  <div class="item" style="text-align:center">
-   <div style="font-size:55px">👑</div>
+ </div>
 
-   <h2>الطالب الأول على الشعبة</h2>
-
-   <h2>حسين خلف فيصل</h2>
-
-   <h3>اللقب: المبعوث الأموي (العرّاب)</h3>
-
-   <p style="color:#e5c36b">
-    تكريماً للتميز والتفوق الدراسي.
-   </p>
-  </div>
- </section>
-
+ <p id="status"></p>
 </div>
-</main>
 
 <footer>
- <p>تطوير وبرمجة</p>
- <strong>محمد باقر خيرالله جاسم</strong>
- <p>© شعبة فاء العظيمة</p>
+ شعبة فاء العظيمة
+ <br>
+ المطور: محمد باقر خيرالله جاسم
 </footer>
-
-<script>
-function showSection(id){
- document.querySelectorAll('.section')
- .forEach(s=>s.classList.remove('active'));
-
- document.getElementById(id)
- .classList.add('active');
-}
-</script>
 
 <script type="module">
 
@@ -275,29 +262,28 @@ from "https://www.gstatic.com/firebasejs/11.6.0/firebase-app.js";
 
 import {
  getAuth,
- onAuthStateChanged,
  signInWithEmailAndPassword,
+ signInAnonymously,
+ onAuthStateChanged,
  signOut
-}
-from "https://www.gstatic.com/firebasejs/11.6.0/firebase-auth.js";
+} from "https://www.gstatic.com/firebasejs/11.6.0/firebase-auth.js";
 
 import {
  getFirestore,
+ collection,
  doc,
  getDoc,
- collection,
  addDoc,
  setDoc,
+ updateDoc,
  deleteDoc,
+ serverTimestamp,
+ onSnapshot,
  query,
  orderBy,
- limit,
- onSnapshot,
- serverTimestamp
-}
-from "https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js";
+ limit
+} from "https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js";
 
-// Firebase configuration
 const firebaseConfig = {
  apiKey: "AIzaSyBpYhM-czPBHGVWJ3BYDoVA7jCS3G5nbIQ",
  authDomain: "fa-class-app.firebaseapp.com",
@@ -307,317 +293,595 @@ const firebaseConfig = {
  appId: "1:657366801476:web:d116b7146815d3db5c7011"
 };
 
-// Initialize Firebase
 const firebaseApp = initializeApp(firebaseConfig);
 const auth = getAuth(firebaseApp);
 const db = getFirestore(firebaseApp);
 
 const $ = id => document.getElementById(id);
 
-let profile = null;
-let stopMessages = null;
-let stopSchedule = null;
+let currentRole = null;
+let studentDisplayName = "";
+let editingHomework = null;
+let editingAnnouncement = null;
+let listeners = [];
+let started = false;
 
-// Login
-$('loginBtn').addEventListener('click',async()=>{
+function status(message) {
+ $("status").textContent = message;
+}
 
- const email = $('email').value.trim();
- const password = $('password').value;
+function show(element, visible) {
+ element.classList.toggle("hidden", !visible);
+}
 
- if(!email || !password){
-  $('loginStatus').textContent =
-  'أدخل البريد الإلكتروني وكلمة المرور.';
+function clearListeners() {
+ listeners.forEach(unsubscribe => unsubscribe());
+ listeners = [];
+ started = false;
+}
+
+function listen(unsubscribe) {
+ listeners.push(unsubscribe);
+}
+
+function isAdmin() {
+ return currentRole === "admin";
+}
+
+function activatePage(page) {
+ document.querySelectorAll(".section").forEach(section => {
+  section.classList.remove("active");
+ });
+ $(page).classList.add("active");
+}
+
+document.querySelectorAll("nav button").forEach(button => {
+ button.addEventListener("click", () => {
+  activatePage(button.dataset.page);
+ });
+});
+
+function makeItem(title, content, date) {
+ const box = document.createElement("div");
+ box.className = "item";
+
+ const heading = document.createElement("h3");
+ heading.textContent = title || "بدون عنوان";
+
+ const paragraph = document.createElement("p");
+ paragraph.textContent = content || "";
+
+ const small = document.createElement("small");
+ small.textContent = date || "";
+
+ box.append(heading, paragraph, small);
+ return box;
+}
+
+function dateText(timestamp) {
+ if (!timestamp || !timestamp.toDate) return "";
+ return timestamp.toDate().toLocaleString("ar-IQ");
+}
+
+// تسجيل دخول المدير
+$("adminLoginBtn").addEventListener("click", async () => {
+ const email = $("adminEmail").value.trim();
+ const password = $("adminPassword").value;
+
+ if (!email || !password) {
+  status("أدخل البريد الإلكتروني وكلمة المرور.");
   return;
  }
 
- $('loginStatus').textContent =
- 'جارٍ تسجيل الدخول...';
-
- try{
-  await signInWithEmailAndPassword(auth,email,password);
-
- }catch(error){
-
+ try {
+  status("جاري تسجيل الدخول...");
+  await signInWithEmailAndPassword(auth, email, password);
+ } catch(error) {
   console.error(error);
-
-  const errors = {
-   'auth/invalid-credential':
-   'البريد الإلكتروني أو كلمة المرور غير صحيحة.',
-   'auth/user-not-found':
-   'الحساب غير موجود.',
-   'auth/wrong-password':
-   'كلمة المرور غير صحيحة.',
-   'auth/invalid-email':
-   'صيغة البريد الإلكتروني غير صحيحة.',
-   'auth/too-many-requests':
-   'محاولات كثيرة. حاول لاحقاً.',
-   'auth/network-request-failed':
-   'تحقق من اتصال الإنترنت.'
-  };
-
-  $('loginStatus').textContent =
-  errors[error.code] ||
-  'تعذر تسجيل الدخول. رمز الخطأ: '+error.code;
+  status("تعذر تسجيل الدخول: " + error.code);
  }
 });
 
-// Check authentication and permissions
-onAuthStateChanged(auth,async user=>{
+// دخول الطلاب
+$("studentLoginBtn").addEventListener("click", async () => {
+ const name = $("studentName").value.trim();
 
- if(stopMessages){
-  stopMessages();
-  stopMessages=null;
+ if (name.length < 2 || name.length > 30) {
+  status("يجب أن يكون الاسم بين حرفين و30 حرفاً.");
+  return;
  }
 
- if(stopSchedule){
-  stopSchedule();
-  stopSchedule=null;
- }
+ try {
+  studentDisplayName = name;
+  localStorage.setItem("faStudentName", name);
 
- profile=null;
-
- $('app').style.display='none';
- $('login').style.display='block';
-
- if(!user)return;
-
- try{
-
-  const snap = await getDoc(
-   doc(db,'users',user.uid)
-  );
-
-  if(!snap.exists()){
-   throw new Error('ملف المستخدم غير موجود في users.');
+  if (auth.currentUser && auth.currentUser.isAnonymous) {
+   currentRole = "student";
+   enterApp(name);
+  } else {
+   await signInAnonymously(auth);
   }
-
-  const data = snap.data();
-
-  if(!['admin','teacher','student'].includes(data.role)){
-   throw new Error('صلاحية الحساب غير معروفة.');
-  }
-
-  profile=data;
-
-  $('login').style.display='none';
-  $('app').style.display='block';
-
-  const roleNames = {
-   admin:'المدير',
-   teacher:'المدرس',
-   student:'الطالب'
-  };
-
-  $('accountInfo').textContent =
-  'صلاحيتك: '+roleNames[data.role];
-
-  const staff =
-  ['admin','teacher'].includes(data.role);
-
-  $('scheduleEditor').style.display =
-  staff ? 'block' : 'none';
-
-  loadMessages();
-  loadSchedule();
-
- }catch(error){
-
+ } catch(error) {
   console.error(error);
-
-  $('loginStatus').textContent =
-  'تعذر التحقق من الحساب: '+error.message;
-
-  await signOut(auth);
+  status("تعذر دخول الطالب: " + error.code);
  }
 });
 
-// Chat messages
-function loadMessages(){
+function enterApp(name) {
+ $("welcome").textContent = isAdmin()
+  ? "مرحباً بالمدير"
+  : "مرحباً، " + name;
 
- const q = query(
-  collection(db,'messages'),
-  orderBy('createdAt','asc'),
-  limit(100)
- );
+ show($("loginBox"), false);
+ show($("app"), true);
 
- stopMessages = onSnapshot(q,snapshot=>{
+ $("addHomework").classList.toggle("hidden", !isAdmin());
+ $("addAnnouncement").classList.toggle("hidden", !isAdmin());
+ $("scheduleEditor").classList.toggle("hidden", !isAdmin());
 
-  $('messages').replaceChildren();
-
-  snapshot.forEach(messageDoc=>{
-
-   const data=messageDoc.data();
-
-   const item=document.createElement('div');
-   item.className='item';
-
-   item.textContent =
-   (data.name||'عضو الشعبة')+': '+(data.text||'');
-
-   $('messages').appendChild(item);
-  });
-
-  $('messages').scrollTop =
-  $('messages').scrollHeight;
-
- },error=>{
-
-  $('chatStatus').textContent =
-  'تعذر تحميل الرسائل.';
-
-  console.error(error);
- });
+ startApplication();
 }
 
-// Send message
-$('sendBtn').addEventListener('click',async()=>{
+// التحقق من حساب المستخدم
+onAuthStateChanged(auth, async user => {
+ clearListeners();
 
- const text=$('chatText').value.trim();
-
- if(!profile || !text)return;
-
- try{
-
-  await addDoc(collection(db,'messages'),{
-
-   name:
-   profile.name ||
-   (profile.role==='admin'?'المدير':
-    profile.role==='teacher'?'مدرس':'طالب'),
-
-   text:text,
-
-   createdAt:serverTimestamp()
-  });
-
-  $('chatText').value='';
-  $('chatStatus').textContent='تم إرسال الرسالة.';
-
- }catch(error){
-
-  $('chatStatus').textContent =
-  'تعذر الإرسال. تحقق من قواعد الأمان.';
-
-  console.error(error);
+ if (!user) {
+  currentRole = null;
+  show($("app"), false);
+  show($("loginBox"), true);
+  return;
  }
-});
 
-// Load schedule
-function loadSchedule(){
+ if (user.isAnonymous) {
+  const name = studentDisplayName ||
+   localStorage.getItem("faStudentName");
 
- const scheduleRef=doc(db,'schedule','weekly');
-
- stopSchedule=onSnapshot(scheduleRef,snap=>{
-
-  $('scheduleList').replaceChildren();
-
-  if(!snap.exists()){
-
-   $('scheduleList').textContent =
-   'لا يوجد جدول منشور حالياً.';
-
+  if (!name) {
+   await signOut(auth);
    return;
   }
 
-  const data=snap.data();
-
-  const title=document.createElement('h3');
-  title.textContent=data.title||'الجدول الدراسي';
-
-  const content=document.createElement('div');
-  content.className='item';
-  content.textContent=
-  data.content||'لم تتم إضافة تفاصيل الجدول بعد.';
-
-  $('scheduleList').append(title,content);
-
-  if(profile && ['admin','teacher'].includes(profile.role)){
-
-   $('scheduleTitle').value =
-   data.title||'الجدول الدراسي';
-
-   $('scheduleContent').value =
-   data.content||'';
-  }
-
- },error=>{
-
-  $('scheduleList').textContent =
-  'تعذر تحميل الجدول. تحقق من قواعد الأمان.';
-
-  console.error(error);
- });
-}
-
-// Save schedule
-$('saveSchedule').addEventListener('click',async()=>{
-
- if(!profile || !['admin','teacher'].includes(profile.role))return;
-
- const title=$('scheduleTitle').value.trim();
- const content=$('scheduleContent').value.trim();
-
- if(!title || !content){
-
-  $('scheduleStatus').textContent =
-  'اكتب عنوان الجدول ومحتواه أولاً.';
-
+  currentRole = "student";
+  studentDisplayName = name;
+  enterApp(name);
   return;
  }
 
- try{
+ try {
+  const userDoc = await getDoc(doc(db, "users", user.uid));
 
-  await setDoc(doc(db,'schedule','weekly'),{
+  if (!userDoc.exists() ||
+      userDoc.data().role !== "admin") {
+   currentRole = null;
+   status("هذا الحساب ليس حساب المدير.");
+   await signOut(auth);
+   return;
+  }
 
+  currentRole = "admin";
+  enterApp("");
+
+ } catch(error) {
+  console.error(error);
+  status("تعذر التحقق من صلاحيات المدير: " + error.code);
+ }
+});
+
+// تسجيل الخروج
+$("logoutBtn").addEventListener("click", async () => {
+ clearListeners();
+ currentRole = null;
+ studentDisplayName = "";
+ localStorage.removeItem("faStudentName");
+
+ try {
+  await signOut(auth);
+  status("تم تسجيل الخروج.");
+ } catch(error) {
+  status("تعذر تسجيل الخروج.");
+ }
+});
+
+// تحميل التطبيق
+function startApplication() {
+ if (started) return;
+ started = true;
+
+ loadSchedule();
+ loadHomework();
+ loadAnnouncements();
+ loadMessages();
+}
+
+// الجدول الدراسي
+function loadSchedule() {
+ listen(onSnapshot(
+  doc(db, "schedule", "weekly"),
+  snapshot => {
+   if (snapshot.exists()) {
+    const data = snapshot.data();
+
+    $("scheduleContent").textContent =
+     (data.title || "الجدول الدراسي") +
+     "\n\n" +
+     (data.content || "لم تتم إضافة تفاصيل الجدول بعد.");
+
+    $("scheduleTitle").value = data.title || "الجدول الدراسي";
+    $("scheduleText").value = data.content || "";
+   } else {
+    $("scheduleContent").textContent =
+     "لم تتم إضافة الجدول الدراسي بعد.";
+   }
+  },
+  error => {
+   console.error(error);
+   $("scheduleContent").textContent =
+    "تعذر تحميل الجدول: " + error.code;
+  }
+ ));
+}
+
+$("saveSchedule").addEventListener("click", async () => {
+ if (!isAdmin()) return;
+
+ const title = $("scheduleTitle").value.trim();
+ const content = $("scheduleText").value.trim();
+
+ if (!title || !content) {
+  status("أدخل عنوان الجدول ومحتواه.");
+  return;
+ }
+
+ try {
+  await setDoc(doc(db, "schedule", "weekly"), {
    title,
    content,
-   updatedAt:serverTimestamp(),
-   updatedBy:auth.currentUser.uid
+   updatedAt: serverTimestamp(),
+   updatedBy: auth.currentUser.uid
+  }, {merge:true});
 
+  status("تم حفظ الجدول بنجاح.");
+ } catch(error) {
+  console.error(error);
+  status("تعذر حفظ الجدول: " + error.code);
+ }
+});
+
+// عرض أزرار الإدارة
+function addAdminActions(box, collectionName, id, data, editFunction) {
+ if (!isAdmin()) return;
+
+ const edit = document.createElement("button");
+ edit.textContent = "تعديل";
+ edit.addEventListener("click", () => editFunction(id, data));
+
+ const remove = document.createElement("button");
+ remove.textContent = "حذف";
+ remove.className = "danger";
+
+ remove.addEventListener("click", async () => {
+  if (!confirm("هل تريد حذف هذا العنصر؟")) return;
+
+  try {
+   await deleteDoc(doc(db, collectionName, id));
+   status("تم الحذف.");
+  } catch(error) {
+   console.error(error);
+   status("تعذر الحذف: " + error.code);
+  }
+ });
+
+ box.append(edit, remove);
+}
+
+// الواجبات
+function loadHomework() {
+ const q = query(
+  collection(db, "homework"),
+  orderBy("createdAt", "desc")
+ );
+
+ listen(onSnapshot(q, snapshot => {
+  const list = $("homeworkList");
+  list.replaceChildren();
+
+  if (snapshot.empty) {
+   list.textContent = "لا توجد واجبات حالياً.";
+   return;
+  }
+
+  snapshot.forEach(item => {
+   const data = item.data();
+   const box = makeItem(
+    data.title,
+    data.content,
+    "تاريخ الإضافة: " + dateText(data.createdAt)
+   );
+
+   addAdminActions(
+    box,
+    "homework",
+    item.id,
+    data,
+    editHomework
+   );
+
+   list.appendChild(box);
+  });
+ }, error => {
+  console.error(error);
+  $("homeworkList").textContent =
+   "تعذر تحميل الواجبات: " + error.code;
+ }));
+}
+
+function editHomework(id, data) {
+ editingHomework = id;
+ $("homeworkTitle").value = data.title;
+ $("homeworkText").value = data.content;
+ $("homeworkFormTitle").textContent = "تعديل الواجب";
+ show($("homeworkEditor"), true);
+}
+
+$("addHomework").addEventListener("click", () => {
+ editingHomework = null;
+ $("homeworkTitle").value = "";
+ $("homeworkText").value = "";
+ $("homeworkFormTitle").textContent = "إضافة واجب جديد";
+ show($("homeworkEditor"), true);
+});
+
+$("cancelHomework").addEventListener("click", () => {
+ editingHomework = null;
+ show($("homeworkEditor"), false);
+});
+
+$("saveHomework").addEventListener("click", async () => {
+ if (!isAdmin()) return;
+
+ const title = $("homeworkTitle").value.trim();
+ const content = $("homeworkText").value.trim();
+
+ if (!title || !content || title.length > 100 ||
+     content.length > 2000) {
+  status("تأكد من العنوان والتفاصيل.");
+  return;
+ }
+
+ try {
+  if (editingHomework) {
+   await updateDoc(doc(db, "homework", editingHomework), {
+    title,
+    content,
+    updatedAt: serverTimestamp()
+   });
+   status("تم تعديل الواجب.");
+  } else {
+   await addDoc(collection(db, "homework"), {
+    title,
+    content,
+    createdAt: serverTimestamp(),
+    updatedAt: serverTimestamp(),
+    createdBy: auth.currentUser.uid
+   });
+   status("تمت إضافة الواجب.");
+  }
+
+  editingHomework = null;
+  show($("homeworkEditor"), false);
+
+ } catch(error) {
+  console.error(error);
+  status("تعذر حفظ الواجب: " + error.code);
+ }
+});
+
+// الإعلانات
+function loadAnnouncements() {
+ const q = query(
+  collection(db, "announcements"),
+  orderBy("createdAt", "desc")
+ );
+
+ listen(onSnapshot(q, snapshot => {
+  const list = $("announcementList");
+  list.replaceChildren();
+
+  if (snapshot.empty) {
+   list.textContent = "لا توجد إعلانات حالياً.";
+   return;
+  }
+
+  snapshot.forEach(item => {
+   const data = item.data();
+   const box = makeItem(
+    data.title,
+    data.content,
+    "تاريخ النشر: " + dateText(data.createdAt)
+   );
+
+   addAdminActions(
+    box,
+    "announcements",
+    item.id,
+    data,
+    editAnnouncement
+   );
+
+   list.appendChild(box);
+  });
+ }, error => {
+  console.error(error);
+  $("announcementList").textContent =
+   "تعذر تحميل الإعلانات: " + error.code;
+ }));
+}
+
+function editAnnouncement(id, data) {
+ editingAnnouncement = id;
+ $("announcementTitle").value = data.title;
+ $("announcementText").value = data.content;
+ $("announcementFormTitle").textContent = "تعديل الإعلان";
+ show($("announcementEditor"), true);
+}
+
+$("addAnnouncement").addEventListener("click", () => {
+ editingAnnouncement = null;
+ $("announcementTitle").value = "";
+ $("announcementText").value = "";
+ $("announcementFormTitle").textContent = "إضافة إعلان جديد";
+ show($("announcementEditor"), true);
+});
+
+$("cancelAnnouncement").addEventListener("click", () => {
+ editingAnnouncement = null;
+ show($("announcementEditor"), false);
+});
+
+$("saveAnnouncement").addEventListener("click", async () => {
+ if (!isAdmin()) return;
+
+ const title = $("announcementTitle").value.trim();
+ const content = $("announcementText").value.trim();
+
+ if (!title || !content || title.length > 100 ||
+     content.length > 2000) {
+  status("تأكد من العنوان والتفاصيل.");
+  return;
+ }
+
+ try {
+  if (editingAnnouncement) {
+   await updateDoc(
+    doc(db, "announcements", editingAnnouncement),
+    {
+     title,
+     content,
+     updatedAt: serverTimestamp()
+    }
+   );
+   status("تم تعديل الإعلان.");
+  } else {
+   await addDoc(collection(db, "announcements"), {
+    title,
+    content,
+    createdAt: serverTimestamp(),
+    updatedAt: serverTimestamp(),
+    createdBy: auth.currentUser.uid
+   });
+   status("تم نشر الإعلان.");
+  }
+
+  editingAnnouncement = null;
+  show($("announcementEditor"), false);
+
+ } catch(error) {
+  console.error(error);
+  status("تعذر حفظ الإعلان: " + error.code);
+ }
+});
+
+// دردشة الشعبة
+function loadMessages() {
+ const q = query(
+  collection(db, "messages"),
+  orderBy("createdAt", "asc"),
+  limit(100)
+ );
+
+ listen(onSnapshot(q, snapshot => {
+  const area = $("chatMessages");
+  area.replaceChildren();
+
+  snapshot.forEach(item => {
+   const data = item.data();
+
+   const box = document.createElement("div");
+   box.className = "message";
+
+   const name = document.createElement("strong");
+   name.textContent = data.name || "طالب";
+
+   const text = document.createElement("p");
+   text.textContent = data.text || "";
+
+   box.append(name, text);
+
+   if (isAdmin()) {
+    const remove = document.createElement("button");
+    remove.className = "danger";
+    remove.textContent = "حذف الرسالة";
+
+    remove.addEventListener("click", async () => {
+     if (!confirm("هل تريد حذف الرسالة؟")) return;
+
+     try {
+      await deleteDoc(doc(db, "messages", item.id));
+      status("تم حذف الرسالة.");
+     } catch(error) {
+      console.error(error);
+      status("تعذر حذف الرسالة: " + error.code);
+     }
+    });
+
+    box.appendChild(remove);
+   }
+
+   area.appendChild(box);
   });
 
-  $('scheduleStatus').textContent =
-  'تم حفظ الجدول بنجاح.';
+  area.scrollTop = area.scrollHeight;
 
- }catch(error){
-
-  $('scheduleStatus').textContent =
-  'تعذر حفظ الجدول. تحقق من قواعد الأمان.';
-
+ }, error => {
   console.error(error);
+  $("chatMessages").textContent =
+   "تعذر تحميل الدردشة: " + error.code;
+ }));
+}
+
+$("sendMessage").addEventListener("click", async () => {
+ const text = $("chatText").value.trim();
+
+ if (!text || text.length > 500) {
+  status("اكتب رسالة لا تتجاوز 500 حرف.");
+  return;
+ }
+
+ if (!auth.currentUser) {
+  status("يجب تسجيل الدخول أولاً.");
+  return;
+ }
+
+ const name = isAdmin()
+  ? "المدير"
+  : studentDisplayName;
+
+ if (!name) {
+  status("اسم المستخدم غير موجود.");
+  return;
+ }
+
+ $("sendMessage").disabled = true;
+
+ try {
+  await addDoc(collection(db, "messages"), {
+   name,
+   text,
+   createdAt: serverTimestamp()
+  });
+
+  $("chatText").value = "";
+  status("تم إرسال الرسالة.");
+
+ } catch(error) {
+  console.error(error);
+  status("تعذر إرسال الرسالة: " + error.code);
+ } finally {
+  $("sendMessage").disabled = false;
  }
 });
-
-// Delete schedule
-$('deleteSchedule').addEventListener('click',async()=>{
-
- if(!profile || !['admin','teacher'].includes(profile.role))return;
-
- if(!confirm('هل تريد حذف الجدول الحالي؟'))return;
-
- try{
-
-  await deleteDoc(doc(db,'schedule','weekly'));
-
-  $('scheduleStatus').textContent =
-  'تم حذف الجدول.';
-
-  $('scheduleTitle').value='';
-  $('scheduleContent').value='';
-
- }catch(error){
-
-  $('scheduleStatus').textContent =
-  'تعذر حذف الجدول.';
-
-  console.error(error);
- }
-});
-
-// Logout
-$('logoutBtn').addEventListener('click',()=>signOut(auth));
 
 </script>
-
 </body>
 </html>
